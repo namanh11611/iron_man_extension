@@ -1,9 +1,7 @@
-console.log("Bypass Youtube Script v1.0");
-
 function closePopup(dialog) {
-    let btnNode = dialog.querySelector('button');
+    let btnConfirm = dialog.querySelector('#confirm-button');
     let event = new Event("click", {"bubbles": true, "cancelable": false});
-    btnNode.dispatchEvent(event);
+    btnConfirm.dispatchEvent(event);
 }
 
 const targetNode = document.body;
@@ -14,11 +12,13 @@ const config = { attributes: true, childList: true, subtree: true };
 // Callback function to execute when mutations are observed
 const callback = function(mutationsList, observer) {
     mutationsList.forEach((mutation) => {
-        if (mutation.type === 'childList' && mutation.target.className === 'dialog-container') {
-	        const dialog = document.querySelector('dialog');
-	        if (dialog) {
-	            closePopup(dialog);
-	        }
+        if (mutation.type === 'childList') {
+            console.log(mutation);
+            const dialog = document.querySelector('yt-confirm-dialog-renderer');
+            if (dialog) {
+                console.log(dialog);
+	              closePopup(dialog);
+	          }
         }
     });
 };

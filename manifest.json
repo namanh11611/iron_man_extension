@@ -1,7 +1,7 @@
 {
-  "name": "Iron-man Extensions",
+  "name": "Iron-man Youtube",
   "description" : "Iron-man Extension for Youtube on Chrome browser, bypass Youtube popup confirm.",
-  "version": "1.0",
+  "version": "1.0.0",
   "permissions": ["activeTab", "declarativeContent", "storage"],
   "background": {
     "scripts": ["background.js"],
