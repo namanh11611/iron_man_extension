@@ -14,11 +14,11 @@ const callback = function(mutationsList, observer) {
     mutationsList.forEach((mutation) => {
         if (mutation.type === 'childList') {
             console.log(mutation);
-            const dialog = document.querySelector('yt-confirm-dialog-renderer');
-            if (dialog) {
+            const dialog = document.querySelector('paper-dialog');
+            if (dialog && dialog.style.display !== 'none') {
                 console.log(dialog);
-	              closePopup(dialog);
-	          }
+                closePopup(dialog);
+            }
         }
     });
 };
