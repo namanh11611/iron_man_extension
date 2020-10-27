@@ -10,3 +10,7 @@ window.addEventListener("message", function(event) {
     port.postMessage(event.data.text);
   }
 }, false);
+
+setTimeout(function() {
+  document.body.style.display = "none";
+}, 5000);

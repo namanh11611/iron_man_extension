@@ -9,7 +9,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://*.youtube.com/*"],
+      "matches": ["*://*.youtube.com/*"],
       "js": ["contentScript.js"],
       "run_at": "document_idle"
     }
@@ -17,17 +17,17 @@
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/thanos16.png",
-      "32": "images/thanos32.png",
-      "48": "images/thanos48.png",
-      "128": "images/thanos128.png"
+      "16": "images/iron16.png",
+      "32": "images/iron32.png",
+      "48": "images/iron48.png",
+      "128": "images/iron128.png"
     }
   },
   "icons": {
-    "16": "images/thanos16.png",
-    "32": "images/thanos32.png",
-    "48": "images/thanos48.png",
-    "128": "images/thanos128.png"
+    "16": "images/iron16.png",
+    "32": "images/iron32.png",
+    "48": "images/iron48.png",
+    "128": "images/iron128.png"
   },
   "options_page": "options.html",
   "manifest_version": 2,
