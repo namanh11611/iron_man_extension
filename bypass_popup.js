@@ -1,7 +1,3 @@
-setTimeout(function() {
-    document.body.style.display = "none";
-}, 5000);
-
 function closePopup(dialog) {
     let btnConfirm = dialog.querySelector('#confirm-button');
     let event = new Event("click", {"bubbles": true, "cancelable": false});
