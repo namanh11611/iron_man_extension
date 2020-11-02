@@ -79,6 +79,16 @@ input:checked + .slider:before {
     transform: translateX(16px);
 }
 
+.form-control.valid:focus {
+    border-color: #3c763d;
+    box-shadow: 0 0 0 0.2rem #3c763d33;
+}
+
+.form-control.invalid:focus {
+    border-color: #a94442;
+    box-shadow: 0 0 0 0.2rem #a9444233;
+}
+
 /* Rounded sliders */
 .slider.round {
     border-radius: 24px;
