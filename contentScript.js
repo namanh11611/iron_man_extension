@@ -14,14 +14,17 @@ window.addEventListener("message", function (event) {
 var isEnableIron;
 var isIronActive;
 var timeOutIron = 0;
-chrome.storage.sync.get(['enable_iron', 'iron_active', 'timeout_iron'], function (result) {
+var timeStartSleep = 0;
+chrome.storage.sync.get(['enable_iron', 'iron_active', 'timeout_iron', 'time_start_sleep'], function (result) {
     isEnableIron = result.enable_iron == "yes";
     isIronActive = result.iron_active == "yes";
     timeOutIron = result.timeout_iron;
+    timeStartSleep = result.time_start_sleep;
 });
 
 setTimeout(function () {
-    if (isIronActive) {
+    var timeNow = (new Date()).getTime();
+    if (isIronActive && ((timeNow - timeStartSleep) < (timeOutIron * 60000))) {
         goToSleepNow();
     } else if (isEnableIron) {
         goToSleepLate();
@@ -29,6 +32,8 @@ setTimeout(function () {
 }, 5000);
 
 function goToSleepNow() {
+    var timeSleep = (new Date()).getTime();
+    chrome.storage.sync.set({ time_start_sleep: timeSleep });
     $("ytd-app").hide();
     $("video").get(0).pause();
     $("body").append("<p id='nan-block-youtube' style='text-align: center; margin: 200px; font-size: 40px;'>Đã hết thời gian xem Youtube. Vui lòng nghỉ ngơi và dành thời gian ra ngoài vui chơi.</p>");
