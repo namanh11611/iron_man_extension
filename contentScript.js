@@ -22,18 +22,35 @@ chrome.storage.sync.get(['enable_iron', 'iron_active', 'timeout_iron'], function
 
 setTimeout(function () {
     if (isIronActive) {
-        goToSleep();
+        goToSleepNow();
     } else if (isEnableIron) {
-        var timeCountDown = timeOutIron * 60000;
-        setTimeout(function () {
-            goToSleep();
-            chrome.storage.sync.set({ iron_active: 'yes' });
-        }, timeCountDown);
+        goToSleepLate();
     }
 }, 5000);
 
-function goToSleep() {
+function goToSleepNow() {
     $("ytd-app").hide();
     $("video").get(0).pause();
-    $("body").append("<p style='text-align: center; margin: 200px; font-size: 40px;'>Đã hết thời gian xem Youtube. Vui lòng nghỉ ngơi và dành thời gian ra ngoài vui chơi.</p>");
+    $("body").append("<p id='nan-block-youtube' style='text-align: center; margin: 200px; font-size: 40px;'>Đã hết thời gian xem Youtube. Vui lòng nghỉ ngơi và dành thời gian ra ngoài vui chơi.</p>");
+
+    wakeUp();
+}
+
+function goToSleepLate() {
+    var timeCountDown = timeOutIron * 60000;
+    setTimeout(function () {
+        goToSleepNow();
+        chrome.storage.sync.set({ iron_active: 'yes' });
+    }, timeCountDown);
+}
+
+function wakeUp() {
+    var timeWakeUp = timeOutIron * 60000;
+    setTimeout(function () {
+        $("ytd-app").show();
+        $("#nan-block-youtube").remove();
+        chrome.storage.sync.set({ iron_active: 'no' });
+
+        goToSleepLate();
+    }, timeWakeUp);
 }
