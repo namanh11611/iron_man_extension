@@ -1,6 +1,7 @@
-chrome.storage.sync.get(['enable_iron', 'timeout_iron'], function(result) {
+chrome.storage.sync.get(['enable_iron', 'timeout_iron', 'timeout_recover'], function(result) {
     $("#toggle-enable-iron").prop("checked", result.enable_iron == "yes");
     $("#input-timeout-iron").val(result.timeout_iron);
+    $("#input-timeout-recover").val(result.timeout_recover);
 });
 
 $(document).ready(function() {
@@ -23,6 +24,16 @@ $(document).ready(function() {
             input.removeClass("valid").addClass("invalid");
         }
         chrome.storage.sync.set({timeout_iron: input.val()});
+    });
+    $("#input-timeout-recover").on("keyup", function(element) {
+        var input = $(this);
+        var regex = /^[1-9][0-9]*$/;
+        if (input.val().match(regex)) {
+            input.removeClass("invalid").addClass("valid");
+        } else {
+            input.removeClass("valid").addClass("invalid");
+        }
+        chrome.storage.sync.set({timeout_recover: input.val()});
     });
 });
 

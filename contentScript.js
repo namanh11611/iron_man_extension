@@ -14,11 +14,13 @@ window.addEventListener("message", function (event) {
 var isEnableIron;
 var isIronActive;
 var timeOutIron = 0;
+var timeOutRecover = 0;
 var timeStartSleep = 0;
-chrome.storage.sync.get(['enable_iron', 'iron_active', 'timeout_iron', 'time_start_sleep'], function (result) {
+chrome.storage.sync.get(['enable_iron', 'iron_active', 'timeout_iron', 'timeout_recover', 'time_start_sleep'], function (result) {
     isEnableIron = result.enable_iron == "yes";
     isIronActive = result.iron_active == "yes";
     timeOutIron = result.timeout_iron;
+    timeOutRecover = result.timeout_recover;
     timeStartSleep = result.time_start_sleep;
 });
 
@@ -50,7 +52,7 @@ function goToSleepLate() {
 }
 
 function wakeUp() {
-    var timeWakeUp = timeOutIron * 60000;
+    var timeWakeUp = timeOutRecover * 60000;
     setTimeout(function () {
         $("ytd-app").show();
         $("#nan-block-youtube").remove();
